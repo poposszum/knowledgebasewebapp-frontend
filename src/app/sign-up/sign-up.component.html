@@ -1,0 +1,12 @@
+<div class="wrapper">
+        <form class="form-signin">       
+          <h2 class="form-signin-heading">Sign-up</h2>
+          <input matInput placeholder="First Name" class="form-control" [(ngModel)]="firstName" name="firstName" required>
+          <input matInput placeholder="Last Name" class="form-control" [(ngModel)]="lastName" name="lastName" required>
+          <input matInput placeholder="Email Address" class="form-control" [(ngModel)]="email" name="email" required>
+          <input matInput placeholder="Password" class="form-control" [(ngModel)]="password" type="password" name="password" required>  
+          <button type="button" class="btn btn-lg btn-primary btn-block" (click)="signUp()">Register</button>
+          <p></p>
+          <a href="http://localhost:4200/login">Already have an account? Login</a>
+        </form>
+      </div>

@@ -1,0 +1,13 @@
+<div class="wrapper">
+    <form class="form-signin" >       
+      <h2 class="form-signin-heading">Login</h2>
+      <input matInput placeholder="Email" class="form-control" [(ngModel)]="email" name="email" required>
+      <input matInput placeholder="Password" class="form-control" [(ngModel)]="password" type="password" name="password" required>  
+      <label class="checkbox">
+        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+      </label>
+      <button type="button" class="btn btn-lg btn-primary btn-block" (click)="login()">Login</button>
+      <p></p>
+      <a href="http://localhost:4200/signup">Sign up for free!</a>
+    </form>
+  </div>
