@@ -1,12 +1,107 @@
-<div class="wrapper">
-        <form class="form-signin">       
-          <h2 class="form-signin-heading">Sign-up</h2>
-          <input matInput placeholder="First Name" class="form-control" [(ngModel)]="firstName" name="firstName" required>
-          <input matInput placeholder="Last Name" class="form-control" [(ngModel)]="lastName" name="lastName" required>
-          <input matInput placeholder="Email Address" class="form-control" [(ngModel)]="email" name="email" required>
-          <input matInput placeholder="Password" class="form-control" [(ngModel)]="password" type="password" name="password" required>  
-          <button type="button" class="btn btn-lg btn-primary btn-block" (click)="signUp()">Register</button>
-          <p></p>
-          <a href="http://localhost:4200/login">Already have an account? Login</a>
-        </form>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="signup-form">
+    <form name="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <h2>Sign Up</h2>
+      <p>Please fill in this form to create an account!</p>
+      <hr>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-6">
+            <input type="text" class="form-control" name="firstName" placeholder="First Name" required="required"
+              formControlName="firstName" [ngClass]="{ 'is-invalid': f.firstName.touched && f.firstName.errors }">
+            <div *ngIf="f.firstName.touched && f.firstName.errors" class="invalid-feedback">
+              <div *ngIf="f.firstName.errors?.required">First Name is required.</div>
+              <div *ngIf="f.firstName.errors?.minlength">First Name must be at least 2 characters long.
+              </div>
+              <div *ngIf="f.firstName.errors?.maxlength">First Name must be maximum 64 characters long.
+              </div>
+              <div *ngIf="f.firstName.errors?.pattern">First Name can contain only alphabetic characters.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-6">
+            <input type="text" class="form-control" name="lastName" placeholder="Last Name" required="required"
+              formControlName="lastName" [ngClass]="{ 'is-invalid': f.lastName.touched && f.lastName.errors }">
+            <div *ngIf="f.lastName.touched && f.lastName.errors" class="invalid-feedback">
+              <div *ngIf="f.lastName.errors?.required">Last Name is required.</div>
+              <div *ngIf="f.lastName.errors?.minlength">Last Name must be at least 2 characters long.
+              </div>
+              <div *ngIf="f.lastName.errors?.maxlength">Last Name must be maximum 64 characters long.
+              </div>
+              <div *ngIf="f.lastName.errors?.pattern">Last Name can contain only alphabetic characters.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" name="email" placeholder="Email" required="required"
+          formControlName="email" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }">
+        <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors?.required">Email Address is required.</div>
+          <div *ngIf="f.email.errors?.email">You need to enter a valid Email Address.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="password" class="form-control" name="password" placeholder="Password" required="required"
+          formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }">
+        <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors?.required">Password is required.</div>
+          <div *ngIf="f.password.errors?.minlength">Password has to be at least 8 characters long. </div>
+          <div *ngIf="f.password.errors?.pattern">Password shall contain at least a character, a number, and at least
+            one of the
+            following characters: !@#$. </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm password"
+          required="required" formControlName="confirmpassword"
+          [ngClass]="{ 'is-invalid': f.confirmpassword.touched && f.confirmpassword.errors }">
+        <div *ngIf="f.confirmpassword.touched && f.confirmpassword.errors" class="invalid-feedback">
+          <div *ngIf="f.confirmpassword.errors?.required">Confirm password is required.</div>
+          <div *ngIf="f.confirmpassword.errors?.passwordMatch">Passwords must match.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="checkbox-inline">
+          <input type="checkbox" formControlName="checkbox"
+            [ngClass]="{ 'is-invalid': f.checkbox.touched && f.checkbox.errors }" required="required"> I accept the <a
+            href="#">Terms of
+            Use</a> &amp; <a href="#">Privacy Policy</a>
+          <div
+            *ngIf="f.checkbox.touched && f.checkbox.errors"
+            class="invalid-feedback">
+            <div
+              *ngIf="f.checkbox.touched && f.checkbox.errors">
+              You have to accept the Terms of Use and the Privacy Policy.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary btn-lg">Sign Up</button>
+      </div>
+    </form>
+    <div class="hint-text">Already have an account? <a href="http://localhost:4200/signin">Login here</a></div>
+  </div>
+</body>
+
+</html>
