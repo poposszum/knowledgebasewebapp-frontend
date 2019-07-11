@@ -45,7 +45,6 @@ export class AuthenticationService {
   }
 
   logout() {
-
     localStorage.removeItem('currentToken');
     this.currentTokenSubject.next(null);
   }

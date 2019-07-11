@@ -9,6 +9,7 @@ import { AppRoutingModule } from './routing.module';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AlertComponent } from './alert/alert.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AlertComponent } from './alert/alert.component';
     DashboardComponent,
     SignUpComponent,
     SignInComponent,
-    AlertComponent
+    AlertComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     BrowserModule,

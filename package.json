@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "postbuild": "npm run deploy",
-    "predeploy": "rimraf ../../knowledgebasewebapp-backend/src/main/resources/static && mkdirp ../../knowledgebasewebapp-backend/src/main/resources/static",
-    "deploy": "copyfiles -f dist/** ../../knowledgebasewebapp-backend/src/main/resources/static",
+    "predeploy": "rimraf ../knowledgebasewebapp-backend/src/main/resources/static && mkdirp ../knowledgebasewebapp-backend/src/main/resources/static",
+    "deploy": "copyfiles -f dist/** ../knowledgebasewebapp-backend/src/main/resources/static",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

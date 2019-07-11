@@ -54,7 +54,7 @@
           formControlName="email" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }">
         <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
           <div *ngIf="f.email.errors?.required">Email Address is required.</div>
-          <div *ngIf="f.email.errors?.email">You need to enter a valid Email Address.</div>
+          <div *ngIf="f.email.errors?.pattern">You need to enter a valid Email Address.</div>
         </div>
       </div>
 
@@ -64,9 +64,8 @@
         <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
           <div *ngIf="f.password.errors?.required">Password is required.</div>
           <div *ngIf="f.password.errors?.minlength">Password has to be at least 8 characters long. </div>
-          <div *ngIf="f.password.errors?.pattern">Password shall contain at least a character, a number, and at least
-            one of the
-            following characters: !@#$. </div>
+          <div *ngIf="f.password.errors?.pattern">Password shall contain alphabetic characters, numbers and at least one of the following characters: !@#$</div>
+          <div *ngIf="f.password.errors?.pattern">Password can not start or end with whitespace.</div>
         </div>
       </div>
 
@@ -100,7 +99,7 @@
         <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary btn-lg">Sign Up</button>
       </div>
     </form>
-    <div class="hint-text">Already have an account? <a href="http://localhost:4200/signin">Login here</a></div>
+    <div class="hint-text">Already have an account? <a href="/signin">Login here</a></div>
   </div>
 </body>
 
