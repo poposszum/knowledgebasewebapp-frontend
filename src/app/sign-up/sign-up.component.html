@@ -13,7 +13,7 @@
 
 <body>
   <div class="signup-form">
-    <form name="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <h2>Sign Up</h2>
       <p>Please fill in this form to create an account!</p>
       <hr>
@@ -50,7 +50,7 @@
       </div>
 
       <div class="form-group">
-        <input type="text" class="form-control" name="email" placeholder="Email" required="required"
+        <input type="text" class="form-control" name="email" placeholder="Email Address" required="required"
           formControlName="email" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }">
         <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
           <div *ngIf="f.email.errors?.required">Email Address is required.</div>
@@ -99,7 +99,7 @@
         <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary btn-lg">Sign Up</button>
       </div>
     </form>
-    <div class="hint-text">Already have an account? <a href="/signin">Login here</a></div>
+    <div class="hint-text">Already have an account? <a href="/signin">Login here!</a></div>
   </div>
 </body>
 
