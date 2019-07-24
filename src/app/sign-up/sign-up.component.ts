@@ -13,7 +13,6 @@ import { AlertService } from '../services/alert/alert.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-
   registerForm: FormGroup;
   loading = false;
   submitted = false;
@@ -78,11 +77,11 @@ export class SignUpComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Registration successful', true);
+          this.alertService.success(Object.values(data)[1], Object.values(data)[0]);
           this.router.navigate(['signin']);
         },
         error => {
-          this.alertService.error(error.error.message);
+          this.alertService.error(error.message);
           this.loading = false;
         });
   }

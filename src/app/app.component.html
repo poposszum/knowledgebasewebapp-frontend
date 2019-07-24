@@ -1,2 +1,8 @@
+<ul *ngIf="currentToken">
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/createarticle">Create article</a></li>
+        <li style="float:right"><a class="active" href="/signin" (click)="signout()">Logout</a></li>
+</ul>
+
 <app-alert></app-alert>
 <router-outlet></router-outlet>

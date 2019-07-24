@@ -23,7 +23,7 @@ export class SignInComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private alertService: AlertService) {
-    if (this.authenticationService.currentUserValue) {
+    if (this.authenticationService.currentTokenValue) {
       this.router.navigate(['dashboard']);
     }
   }
@@ -38,6 +38,9 @@ export class SignInComponent implements OnInit {
         Validators.required
       ]
     });
+
+    this.authenticationService.logout();
+
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
@@ -58,7 +61,7 @@ export class SignInComponent implements OnInit {
           this.router.navigate(['dashboard']);
         },
         error => {
-          this.alertService.error(error.error.message);
+          this.alertService.error(error);
           this.loading = false;
         });
   }

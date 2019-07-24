@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication/authentication.service';
 import { Router } from '@angular/router';
+import { Token } from '../models/Token';
+import { UserService } from '../services/user/user.service';
+import { first } from 'rxjs/operators';
+import { Article } from '../models/Article';
+import { ArticleService } from '../services/article/article.service';
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -8,15 +15,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  currentToken: Token;
+  articleList: Article[] = [];
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) { }
+  constructor(private authenticationService: AuthenticationService,
+     private router: Router,
+     private userService: UserService,
+     private articleService: ArticleService) {}
 
   ngOnInit() {
+    this.articleService.getArticles().pipe(first()).subscribe(articles =>{
+      console.log(articles)
+      this.articleList = articles;
+    })
   }
-
-  signout(){
-    this.authenticationService.logout();
-    this.router.navigate(['signin']);
-  }
-
 }

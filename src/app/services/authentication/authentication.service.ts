@@ -19,7 +19,7 @@ export class AuthenticationService {
     this.currentToken = this.currentTokenSubject.asObservable();
   }
 
-  public get currentUserValue(): Token {
+  public get currentTokenValue(): Token {
     return this.currentTokenSubject.value;
   }
 
