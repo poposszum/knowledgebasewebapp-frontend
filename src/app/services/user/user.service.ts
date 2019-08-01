@@ -22,10 +22,14 @@ export class UserService {
   }
 
   changePassword(password: string, resetKey: string){
-    return this.http.post(this.changePasswordUrl, { password, resetKey});
+    return this.http.post(this.changePasswordUrl, { password, resetKey });
   }
 
   getAll(){
     return this.http.get<User[]>('http://localhost:8080/api/v1/users');
+  }
+
+  getUser(id: string) {
+    return this.http.get<User>('http://localhost:8080/api/v1/users/' + id + '/fullname');
   }
 }

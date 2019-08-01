@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user/user.service';
-import { AlertService } from '../services/alert/alert.service';
+import { UserService } from '../../services/user/user.service';
 
+import swal from 'sweetalert2';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -18,8 +18,7 @@ export class ForgotpasswordComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
-    private userService : UserService,
-    private alertService: AlertService) { }
+    private userService : UserService) { }
 
   ngOnInit() {
     this.forgotPasswordForm = this.formBuilder.group({
@@ -45,12 +44,15 @@ export class ForgotpasswordComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success("Password reset link: " + Object.values(data)[1], Object.values(data)[0]);
+          const link = document.createElement('a');
+          link.href = Object.values(data)[1];
+          link.innerText = "Click here to reset your password";
+          swal.fire({
+            type: 'success',
+            text: 'Your link was generated successfully',
+            footer: link
+          })
           this.router.navigate(['signin']);
-        },
-        error => {
-          this.alertService.error(error.error.message);
-          this.loading = false;
         });
   }
 

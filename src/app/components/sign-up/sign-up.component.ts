@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { passwordMatch } from '../validators/password-match.validator';
-import { UserService } from '../services/user/user.service';
+import { passwordMatch } from '../../validators/password-match.validator';
+import { UserService } from '../../services/user/user.service';
 import { first } from 'rxjs/operators';
-import { AlertService } from '../services/alert/alert.service';
+import { AlertService } from '../../services/alert/alert.service';
+
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -77,11 +79,18 @@ export class SignUpComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success(Object.values(data)[1], Object.values(data)[0]);
+          swal.fire({
+            type: 'success',
+            text: (Object.values(data)[1])
+          })
           this.router.navigate(['signin']);
         },
         error => {
-          this.alertService.error(error.message);
+          swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: (error)
+          })
           this.loading = false;
         });
   }

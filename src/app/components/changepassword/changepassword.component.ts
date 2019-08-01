@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserService } from '../services/user/user.service';
-import { AlertService } from '../services/alert/alert.service';
-import { passwordMatch } from '../validators/password-match.validator';
+import { UserService } from '../../services/user/user.service';
+import { AlertService } from '../../services/alert/alert.service';
+import { passwordMatch } from '../../validators/password-match.validator';
 
 import { first } from 'rxjs/operators';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-changepassword',
@@ -60,14 +61,19 @@ export class ChangepasswordComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success(Object.values(data)[1], Object.values(data)[0]);
+          swal.fire({
+            type: 'success',
+            text: (Object.values(data)[1])
+          })
           this.router.navigate(['signin']);
         },
         error => {
-          console.log(error)
-          this.alertService.error(error.error.message);
+          swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: (error)
+          })
           this.loading = false;
         });
   }
-
 }

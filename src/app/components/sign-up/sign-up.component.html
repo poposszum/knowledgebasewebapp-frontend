@@ -83,8 +83,8 @@
         <label class="checkbox-inline">
           <input type="checkbox" formControlName="checkbox"
             [ngClass]="{ 'is-invalid': f.checkbox.touched && f.checkbox.errors }" required="required"> I accept the <a
-            href="#">Terms of
-            Use</a> &amp; <a href="#">Privacy Policy</a>
+            href="/termsofuseandprivacypolicy" target="_blank">Terms of
+            Use</a> &amp; <a href="/termsofuseandprivacypolicy" target="_blank">Privacy Policy</a>
           <div
             *ngIf="f.checkbox.touched && f.checkbox.errors"
             class="invalid-feedback">

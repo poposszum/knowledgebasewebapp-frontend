@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+</head>
+
+<body>
+    <div class="login-form">
+        <form [formGroup]="articleForm">
+
+            <div class="form-group" *ngIf="!editable">
+                <button type="submit" (click)="onDelete()" class="btn btn-primary deletebutton">
+                    Delete
+                </button>
+                <button type="submit" (click)="onEdit()" class="btn btn-primary editbutton">
+                    Edit
+                </button>
+            </div>
+
+            <div class="form-group" *ngIf="editable">
+                    <button type="submit" (click)="cancelEdit()" class="btn btn-primary deletebutton">
+                        Cancel
+                    </button>
+                    <button type="submit" (click)="onSave()" class="btn btn-primary editbutton">
+                        Save
+                    </button>
+                </div>
+
+
+            <article [contenteditable]="editable" id="article_title">
+                <h1>{{article?.title}}</h1>
+            </article>
+
+            <hr>
+            <article [contenteditable]="editable" id="article_content">
+                {{article?.content}}
+            </article>
+
+            <p class="date">
+                Last edited on {{article?.dateModified}} by <b>{{user?.firstName}} {{user?.lastName}}</b>
+            </p>
+
+
+        </form>
+    </div>
+</body>
+
+</html>

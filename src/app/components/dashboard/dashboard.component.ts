@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../services/authentication/authentication.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Router } from '@angular/router';
-import { Token } from '../models/Token';
-import { UserService } from '../services/user/user.service';
+import { Token } from '../../models/Token';
+import { UserService } from '../../services/user/user.service';
 import { first } from 'rxjs/operators';
-import { Article } from '../models/Article';
-import { ArticleService } from '../services/article/article.service';
+import { Article } from '../../models/Article';
+import { ArticleService } from '../../services/article/article.service';
 
 
 
@@ -24,9 +24,12 @@ export class DashboardComponent implements OnInit {
      private articleService: ArticleService) {}
 
   ngOnInit() {
-    this.articleService.getArticles().pipe(first()).subscribe(articles =>{
-      console.log(articles)
+    this.articleService.getArticleTitles().pipe(first()).subscribe(articles =>{
       this.articleList = articles;
     })
+  }
+
+  dateFormat(date: Date) {
+      return date.getFullYear() + "." + date.getMonth() + "." + date.getDay() + " " + date.getHours + " " + date.getMinutes;
   }
 }

@@ -6,16 +6,27 @@ import { Article } from '../../models/Article';
   providedIn: 'root'
 })
 export class ArticleService {
-  private createArticleUrl = "http://localhost:8080/api/v1/articles/create"
-  private getArticlesUrl = "http://localhost:8080/api/v1/articles"
+  private articleUrl = "http://localhost:8080/api/v1/articles/"
 
   constructor(private http: HttpClient) { }
 
   createArticle(title: String, content: String) {
-    return this.http.post(this.createArticleUrl, {title, content});
+    return this.http.post(this.articleUrl + "create", {title, content});
   }
 
-  getArticles() {
-    return this.http.get<Article[]>(this.getArticlesUrl);
+  getArticleTitles() {
+    return this.http.get<Article[]>(this.articleUrl + "titles");
+  }
+
+  getArticleById(id: string) {
+    return this.http.get<Article>(this.articleUrl + id);
+  }
+
+  editArticle(stringId: string, title: string, content: string) {
+    return this.http.post(this.articleUrl + "edit/"  + stringId, {title, content});
+  }
+
+  deleteArticle(stringId: string) {
+      return this.http.delete(this.articleUrl + "delete/" + stringId);
   }
 }

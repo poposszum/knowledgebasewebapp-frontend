@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Articles</h2>
+        <ul class="responsive-table">
+
+          <li class="table-header">
+            <div class="col col-1">Title</div>
+            <div class="col col-3">Date Created</div>
+          </li>
+
+          <li class="table-row" *ngFor="let article of articleList">
+            <div class="col col-1"><a href="/article?a={{article.stringId}}" style="white-space: nowrap">{{article?.title}}</a></div>
+            <div class="col col-3">{{article?.dateCreated}}</div>
+          </li>
+
+        </ul>
+</div>

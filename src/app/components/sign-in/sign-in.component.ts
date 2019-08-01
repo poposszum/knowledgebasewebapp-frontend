@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../services/authentication/authentication.service';
-import { AlertService } from '../services/alert/alert.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { AlertService } from '../../services/alert/alert.service';
 
 import { first } from 'rxjs/operators';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class SignInComponent implements OnInit {
         Validators.required
       ],
 
-      password: ['', 
+      password: ['',
         Validators.required
       ]
     });
@@ -58,12 +59,19 @@ export class SignInComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          swal.fire({
+            type: 'success',
+            text: ('You logged in successfuly')
+          })
           this.router.navigate(['dashboard']);
         },
         error => {
-          this.alertService.error(error);
+          swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: (error)
+          })
           this.loading = false;
-        });
+        })
   }
-
 }

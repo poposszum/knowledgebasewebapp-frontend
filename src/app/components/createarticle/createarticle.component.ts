@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user/user.service';
-import { AlertService } from '../services/alert/alert.service';
-import { ArticleService } from '../services/article/article.service';
+import { UserService } from '../../services/user/user.service';
+import { AlertService } from '../../services/alert/alert.service';
+import { ArticleService } from '../../services/article/article.service';
 
 import { first } from 'rxjs/operators';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-createarticle',
@@ -19,14 +20,16 @@ export class CreatearticleComponent implements OnInit {
 
   constructor(private router: Router, 
     private formBuilder: FormBuilder, 
-    private userService: UserService, 
-    private alertService: AlertService,
     private articleService: ArticleService) { }
 
   ngOnInit() {
     this.createArticleForm = this.formBuilder.group({
-      articleTitle: ['',
+      articleTitle: ['', [
         Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(64),
+        Validators.pattern(/^\S(?!.*\s{2}).*?\S$/)
+        ]
       ],
 
       articleContent: ['',]
@@ -47,11 +50,18 @@ export class CreatearticleComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success(Object.values(data)[1], Object.values(data)[0]);
+          swal.fire({
+            type: 'success',
+            text: (Object.values(data)[1])
+          })
           this.router.navigate(['dashboard']);
         },
         error => {
-          this.alertService.error(error.error.message);
+          swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: (error)
+          })
           this.loading = false;
         });
   }

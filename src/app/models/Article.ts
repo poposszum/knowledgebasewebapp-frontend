@@ -1,8 +1,9 @@
 export class Article {
-    id: String;
-    title: String;
-    content: String;
-    authors: String[];
+    stringId: string;
+    title: string;
+    content: string;
+    lastEditedAuthor: string;
+    authors: string[];
     dateCreated: Date;
     dateModified: Date;
 }

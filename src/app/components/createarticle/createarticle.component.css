@@ -15,7 +15,7 @@ body {
         border-radius: 2px;
     }
   .login-form {
-    width: 350px;
+    width: 70%;
     margin: 30px auto;
   }
   .login-form h2 {
